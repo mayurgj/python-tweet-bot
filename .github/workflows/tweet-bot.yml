@@ -1,8 +1,15 @@
 name: Tweet Bot Scheduler
+
 on:
   schedule:
-    - cron: '15 4 * * *' # Runs every day at 10:15 AM IST (~4:15 AM UTC)
+    # Run at 4:30 AM UTC (10:00 AM IST)
+    - cron: '30 4 * * *'
+    # Run at 8:30 AM UTC (2:00 PM IST)
+    - cron: '30 8 * * *'
+    # Run at 12:30 PM UTC (6:00 PM IST)
+    - cron: '30 12 * * *'
   workflow_dispatch:
+
 jobs:
   post_tweet:
     runs-on: ubuntu-latest
@@ -14,7 +21,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: pip install tweepy
+        run: pip install tweepy pandas
       - name: Run tweet bot
         env:
           X_API_KEY: ${{ secrets.X_API_KEY }}
